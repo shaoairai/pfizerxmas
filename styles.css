@@ -1,0 +1,960 @@
+:root {
+    --green: #5a8f6f;
+    --pink: #f5adc0;
+    --bg: #fef0f4;
+
+    --card: rgba(255, 255, 255, 0.60);
+    --ink: rgba(31, 42, 36, 0.85);
+
+    --shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+    --radius: 26px;
+    --tile-radius: 16px;
+
+    --white: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+html{
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+
+body {
+    margin: 0;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, "PingFang TC", "Microsoft JhengHei", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    overflow-x: hidden;
+}
+
+/* ---------- 背景裝飾 ---------- */
+.bg-decor {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.bg-orb {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    border-radius: 999px;
+    background: rgba(245, 173, 192, 0.18);
+}
+
+.orb-1 {
+    left: -40px;
+    top: 18%;
+    width: 140px;
+    height: 140px;
+    opacity: 0.55;
+}
+
+.orb-2 {
+    right: -60px;
+    bottom: 12%;
+    width: 220px;
+    height: 220px;
+    opacity: 0.35;
+}
+
+.orb-3 {
+    left: 18%;
+    bottom: -90px;
+    width: 240px;
+    height: 240px;
+    opacity: 0.22;
+}
+
+.bg-sparkle {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    transform: rotate(45deg);
+    background: rgba(255, 212, 140, 0.65);
+    border-radius: 3px;
+}
+
+.bg-sparkle::before,
+.bg-sparkle::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: rotate(90deg);
+    background: inherit;
+    border-radius: inherit;
+}
+
+.sp-1 {
+    right: 14%;
+    top: 42%;
+    opacity: 0.40;
+}
+
+.sp-2 {
+    left: 9%;
+    top: 55%;
+    opacity: 0.30;
+    transform: rotate(20deg);
+}
+
+.sp-3 {
+    right: 28%;
+    bottom: 22%;
+    opacity: 0.25;
+    transform: rotate(70deg);
+}
+
+.bg-snowmark {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    opacity: 0.45;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.55);
+    box-shadow:
+        0 0 0 6px rgba(255, 255, 255, 0.10),
+        0 0 0 12px rgba(255, 255, 255, 0.06);
+}
+
+.sm-1 {
+    right: 8%;
+    top: 28%;
+    transform: scale(0.9);
+}
+
+.sm-2 {
+    right: 6%;
+    bottom: 18%;
+    transform: scale(1.05);
+    opacity: 0.35;
+}
+
+/* ---------- 版面 ---------- */
+.page {
+    position: relative;
+    z-index: 1;
+    min-height: 100%;
+    padding: 44px 20px 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* 水平置中 */
+    justify-content: center;
+    /* 不要把內容撐開 */
+    gap: 34px;
+
+}
+
+/* ---------- Hero ---------- */
+.hero {
+    width: min(1060px, 100%);
+    text-align: center;
+    padding-top: 6px;
+}
+
+.hero-title {
+    margin: 0 0 12px;
+    font-size: clamp(26px, 6vw, 48px);
+    letter-spacing: 0.4px;
+    color: rgba(211, 72, 118, 0.85);
+    font-family: ui-rounded, "Comic Sans MS", "Segoe Print", cursive, system-ui;
+    font-weight: 500;
+}
+
+.hero-subtitle {
+    margin: 0 0 22px;
+    font-size: clamp(14px, 3vw, 32px);
+    color: rgba(43, 91, 70, 0.75);
+    letter-spacing: 0.2px;
+}
+
+/* 桌機預設：同一行 */
+.hero-title .t-main,
+.hero-title .t-sub {
+    white-space: nowrap;
+}
+
+
+/* ---------- CSS 聖誕樹 ---------- */
+.tree-wrap {
+    display: grid;
+    place-items: center;
+    margin-top: 10px;
+}
+
+.tree {
+    position: relative;
+    width: 240px;
+    height: 300px;
+    /* 增高，讓樹幹不會插進樹葉 */
+    filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.10));
+}
+
+.tree-tier {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 105px solid transparent;
+    border-right: 105px solid transparent;
+    border-bottom: 90px solid rgba(245, 173, 192, 0.65);
+    border-radius: 8px;
+    z-index: 2;
+}
+
+.tree-tier::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 18px;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 90px solid transparent;
+    border-right: 90px solid transparent;
+    border-bottom: 78px solid rgba(245, 173, 192, 0.40);
+}
+
+/* 上中下層位置微調，避免與樹幹重疊 */
+.t1 {
+    top: 14px;
+    border-left-width: 65px;
+    border-right-width: 65px;
+    border-bottom-width: 56px;
+}
+
+.t1::after {
+    border-left-width: 54px;
+    border-right-width: 54px;
+    border-bottom-width: 46px;
+    top: 12px;
+}
+
+.t2 {
+    top: 56px;
+    border-left-width: 82px;
+    border-right-width: 82px;
+    border-bottom-width: 70px;
+}
+
+.t2::after {
+    border-left-width: 70px;
+    border-right-width: 70px;
+    border-bottom-width: 60px;
+    top: 14px;
+}
+
+.t3 {
+    top: 104px;
+    border-left-width: 95px;
+    border-right-width: 95px;
+    border-bottom-width: 80px;
+}
+
+.t3::after {
+    border-left-width: 82px;
+    border-right-width: 82px;
+    border-bottom-width: 70px;
+    top: 16px;
+}
+
+.t4 {
+    top: 158px;
+    border-left-width: 110px;
+    border-right-width: 110px;
+    border-bottom-width: 92px;
+}
+
+.t4::after {
+    border-left-width: 95px;
+    border-right-width: 95px;
+    border-bottom-width: 80px;
+    top: 18px;
+}
+
+.tree-trunk {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    /* 貼底 */
+    transform: translateX(-50%);
+    width: 38px;
+    height: 46px;
+    border-radius: 6px;
+    background: rgba(166, 132, 90, 0.75);
+    box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, 0.25),
+        0 10px 18px rgba(0, 0, 0, 0.10);
+    z-index: 3;
+}
+
+.tree-star {
+    position: absolute;
+    left: 50%;
+    top: -6px;
+    transform: translateX(-50%) rotate(20deg);
+    width: 18px;
+    height: 18px;
+    background: rgba(255, 212, 140, 0.90);
+    clip-path: polygon(50% 0%, 62% 35%, 98% 35%, 68% 57%, 79% 92%, 50% 70%, 21% 92%, 32% 57%, 2% 35%, 38% 35%);
+    filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.14));
+    z-index: 4;
+}
+
+/* 樹上燈泡：呼吸閃爍（越亮→越暗→重複） */
+.bulb {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 999px;
+
+    /* 兩色系：粉/金（用 nth 或指定 class 也可，這裡用不同 opacity 做變化） */
+    background: rgba(255, 255, 255, 0.40);
+    box-shadow:
+        0 0 0 4px rgba(255, 255, 255, 0.10),
+        0 0 14px rgba(255, 255, 255, 0.00);
+
+    animation: glow 2.6s ease-in-out infinite;
+    z-index: 5;
+}
+
+/* 讓每顆燈有不同節奏與延遲，更像燈火 */
+.b1 {
+    left: 40%;
+    top: 66px;
+    animation-delay: 0.0s;
+    animation-duration: 2.4s;
+}
+
+.b2 {
+    left: 58%;
+    top: 92px;
+    animation-delay: 0.6s;
+    animation-duration: 2.8s;
+    opacity: 0.55;
+}
+
+.b3 {
+    left: 34%;
+    top: 114px;
+    animation-delay: 1.1s;
+    animation-duration: 2.2s;
+    opacity: 0.48;
+}
+
+.b4 {
+    left: 63%;
+    top: 140px;
+    animation-delay: 0.3s;
+    animation-duration: 3.0s;
+    opacity: 0.52;
+}
+
+.b5 {
+    left: 41%;
+    top: 170px;
+    animation-delay: 0.9s;
+    animation-duration: 2.7s;
+    opacity: 0.46;
+}
+
+.b6 {
+    left: 55%;
+    top: 186px;
+    animation-delay: 0.2s;
+    animation-duration: 2.5s;
+    opacity: 0.50;
+}
+
+.b7 {
+    left: 30%;
+    top: 154px;
+    animation-delay: 1.4s;
+    animation-duration: 3.2s;
+    opacity: 0.44;
+}
+
+.b8 {
+    left: 68%;
+    top: 112px;
+    animation-delay: 0.8s;
+    animation-duration: 2.9s;
+    opacity: 0.50;
+}
+
+@keyframes glow {
+    0% {
+        transform: scale(0.92);
+        opacity: 0.30;
+        background: rgba(255, 255, 255, 0.32);
+        box-shadow:
+            0 0 0 4px rgba(255, 255, 255, 0.08),
+            0 0 10px rgba(255, 255, 255, 0.00);
+    }
+
+    50% {
+        transform: scale(1.08);
+        opacity: 0.95;
+        background: rgba(255, 255, 255, 0.70);
+        box-shadow:
+            0 0 0 5px rgba(255, 255, 255, 0.16),
+            0 0 18px rgba(255, 255, 255, 0.45),
+            0 0 30px rgba(245, 173, 192, 0.25);
+    }
+
+    100% {
+        transform: scale(0.92);
+        opacity: 0.35;
+        background: rgba(255, 255, 255, 0.34);
+        box-shadow:
+            0 0 0 4px rgba(255, 255, 255, 0.08),
+            0 0 10px rgba(255, 255, 255, 0.00);
+    }
+}
+
+/* ---------- Calendar Card ---------- */
+.calendar-card {
+    width: min(1060px, 100%);
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    padding: clamp(18px, 2.2vw, 28px);
+    backdrop-filter: blur(10px);
+}
+
+.calendar {
+    display: grid;
+    /* 關鍵：避免某格內容撐寬造成欄位不等寬 */
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: clamp(12px, 1.6vw, 18px);
+    align-items: stretch;
+
+    /* 讓 xmas-side 能超出格子往右顯示 */
+    overflow: visible;
+}
+
+.calendar>* {
+    min-width: 0;
+}
+
+/* 再保險一次：避免 min-content 影響 */
+
+.dow {
+    text-align: center;
+    font-family: ui-rounded, "Times New Roman", serif;
+    letter-spacing: 0.8px;
+    color: rgba(211, 72, 118, 0.75);
+    font-weight: 600;
+    padding: 6px 0 10px;
+}
+
+.cell {
+    position: relative;
+    height: clamp(72px, 7.5vw, 96px);
+    border-radius: var(--tile-radius);
+}
+
+.cell-empty {
+    background: transparent;
+    border: 1px dashed rgba(0, 0, 0, 0.00);
+}
+
+.day {
+    width: 100%;
+    border: 0;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    outline: none;
+    min-width: 0;
+    /* 避免文字造成欄位被撐大 */
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.10);
+    transition: transform 160ms ease, box-shadow 160ms ease, filter 140ms ease;
+}
+
+.day:focus-visible {
+    box-shadow: 0 0 0 4px rgba(245, 173, 192, 0.45), 0 10px 22px rgba(0, 0, 0, 0.10);
+}
+
+.day:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 26px rgba(0, 0, 0, 0.12);
+}
+
+.locked {
+    cursor: not-allowed;
+    background: var(--green);
+    color: var(--white);
+    filter: saturate(0.95);
+}
+
+.locked:hover {
+    transform: none;
+}
+
+.pink {
+    background: var(--pink);
+    color: var(--white);
+}
+
+.day-num {
+    font-size: clamp(22px, 2.2vw, 28px);
+    font-weight: 700;
+    text-shadow: 0 2px 0 rgba(0, 0, 0, 0.08);
+}
+
+/* 迷你鎖頭 */
+.mini-lock {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 16px;
+    height: 12px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.30);
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+}
+
+.mini-lock::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -7px;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    border-bottom: 0;
+    border-radius: 10px 10px 0 0;
+}
+
+/* 迷你蝴蝶結 */
+.mini-bow {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 14px;
+    height: 14px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.14));
+    background: radial-gradient(circle at 50% 50%, rgba(211, 72, 118, 0.95) 0 2px, transparent 3px);
+}
+
+.mini-bow::before,
+.mini-bow::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    width: 7px;
+    height: 8px;
+    background: rgba(211, 72, 118, 0.90);
+    border-radius: 3px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.mini-bow::before {
+    left: 0;
+    transform: rotate(18deg);
+    border-top-right-radius: 10px;
+}
+
+.mini-bow::after {
+    right: 0;
+    transform: rotate(-18deg);
+    border-top-left-radius: 10px;
+}
+
+/* Xmas tile */
+.xmas {
+    background: var(--pink);
+    color: var(--white);
+    text-align: center;
+    padding: 10px 8px;
+    overflow: visible;
+    /* 讓右側文字可超出顯示 */
+}
+
+.gift {
+    width: 22px;
+    height: 18px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.28);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.gift::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 2px;
+}
+
+.gift::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 2px;
+}
+
+.xmas-text {
+    font-family: ui-rounded, "Times New Roman", serif;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    line-height: 1.05;
+    font-size: clamp(13px, 1.2vw, 16px);
+    opacity: 0.92;
+    text-shadow: 0 2px 0 rgba(0, 0, 0, 0.06);
+    white-space: normal;
+}
+
+/* 手機版：框外右側顯示，不影響欄寬 */
+.xmas-side {
+    display: none;
+    position: absolute;
+    left: calc(100% + 14px);
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(211, 72, 118, 0.90);
+    font-family: ui-rounded, "Times New Roman", serif;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    line-height: 1.05;
+    text-align: left;
+    text-shadow: 0 8px 18px rgba(0, 0, 0, 0.10);
+    pointer-events: none;
+}
+
+/* ---------- Modal：水平垂直置中 + 內容可捲動 ---------- */
+.modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    z-index: 50;
+
+    /* 置中關鍵 */
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+}
+
+.modal.is-open {
+    display: flex;
+}
+
+.modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    animation: fadeIn 180ms ease-out forwards;
+}
+
+.modal-dialog {
+    position: relative;
+    width: min(560px, 100%);
+    max-height: calc(100vh - 48px);
+    animation: popIn 200ms ease-out forwards;
+    z-index: 1;
+}
+
+.modal-content {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.28);
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.10);
+
+    /* 讓 body 可滾動 */
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 48px);
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    background: linear-gradient(180deg, rgba(245, 173, 192, 0.20), rgba(245, 173, 192, 0.00));
+    flex: 0 0 auto;
+}
+
+.modal-title {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: rgba(40, 40, 40, 0.92);
+    letter-spacing: 0.2px;
+}
+
+.btn-close {
+    width: 34px;
+    height: 34px;
+    border: 0;
+    background: transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+}
+
+.btn-close:hover {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+.btn-close::before,
+.btn-close::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 16px;
+    height: 2px;
+    background: rgba(0, 0, 0, 0.55);
+    border-radius: 2px;
+    transform-origin: center;
+}
+
+.btn-close::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.btn-close::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.modal-body,
+.modal-body *{
+  font-size: inherit;
+}
+
+
+.modal-body {
+    padding: 16px;
+    color: rgba(30, 30, 30, 0.88);
+    line-height: 1.55;
+    font-size: 1.25rem;
+
+    /* 內容過長時出現卷軸 */
+    overflow: auto;
+    flex: 1 1 auto;
+}
+
+.modal-body p {
+    margin: 0 0 10px;
+}
+
+.modal-body ul {
+    margin: 8px 0 0 18px;
+    padding: 0;
+}
+
+.modal-body li {
+    margin: 6px 0;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 12px 16px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    background: rgba(0, 0, 0, 0.02);
+    flex: 0 0 auto;
+}
+
+.btn {
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    padding: 9px 14px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 14px;
+    transition: transform 140ms ease, filter 140ms ease, background 140ms ease;
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+.btn-secondary {
+    background: #fff;
+    color: rgba(20, 20, 20, 0.82);
+}
+
+.btn-secondary:hover {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.btn-primary {
+    border-color: rgba(0, 0, 0, 0.10);
+    background: rgba(211, 72, 118, 0.92);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    filter: brightness(1.03);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes popIn {
+    from {
+        transform: translateY(10px) scale(0.98);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* ---------- Snow (pure CSS flakes, JS spawns) ---------- */
+#snow-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 2;
+    mix-blend-mode: screen;
+}
+
+.snowflake {
+    position: absolute;
+    top: -20px;
+    width: 10px;
+    height: 10px;
+    opacity: 0.7;
+    will-change: transform;
+    filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.06));
+    animation-name: fall;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+.snowflake::before,
+.snowflake::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 100%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.70);
+    border-radius: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.snowflake::after {
+    transform: translateY(-50%) rotate(60deg);
+}
+
+.snowflake .arm {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 100%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.70);
+    border-radius: 2px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-60deg);
+}
+
+@keyframes fall {
+    0% {
+        transform: translate3d(var(--drift, 0px), -20px, 0) rotate(0deg);
+    }
+
+    100% {
+        transform: translate3d(calc(var(--drift, 0px) * 1.6), calc(100vh + 40px), 0) rotate(220deg);
+    }
+}
+
+/* ---------- RWD ---------- */
+@media (max-width: 720px) {
+    .calendar {
+        gap: 10px;
+    }
+}
+
+/* 小螢幕：框內不顯示 Happy Christmas，改右側顯示（不撐寬欄位） */
+@media (max-width: 768px) {
+    .xmas-text {
+        display: none;
+    }
+
+    .xmas-side {
+        display: block;
+    }
+
+    /* 讓樹 + 日曆在手機版更黏在一起，且整組水平置中 */
+    .page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        /* 仍可往下捲 */
+        gap: 16px;
+        /* 原本 34px 太大，手機會顯得分離 */
+        padding-top: 20px;
+        padding-bottom: 40px;
+    }
+
+    /* Hero 底部間距縮小，避免把日曆推到很下面 */
+    .hero {
+        margin: 0;
+    }
+
+    .hero-subtitle {
+        margin-bottom: 10px;
+        /* 原本 22px */
+    }
+
+    /* 樹稍微縮小，避免視覺上離日曆太遠 */
+    .tree {
+        transform: scale(0.90);
+        transform-origin: top center;
+    }
+
+    /* 日曆卡片在手機版不要太寬，也別貼底太遠 */
+    .calendar-card {
+        margin-top: 0;
+    }
+}

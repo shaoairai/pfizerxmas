@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <!-- 基本 SEO 摘要（LINE 抓不到 OG 時也可能用這個） -->
+    <meta name="description" content="一週開箱一次乳癌小知識，陪你／妳度過聖誕月。點選粉紅日期解鎖內容。" />
+
+    <!-- Open Graph：LINE 預覽主要看這些 -->
+    <meta property="og:title" content="Pink Forward．聖誕倒數日曆" />
+    <meta property="og:description" content="一週開箱一次乳癌小知識，陪你／妳度過聖誕月。點選粉紅日期解鎖內容。" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ottaster.com/pfizertest2/" />
+
+    <!-- 一張預覽圖（必須是可公開存取的絕對網址） -->
+    <meta property="og:image" content="https://ottaster.com/pfizertest2/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="zh_TW" />
+
+    <title>Pink Forward．聖誕倒數日曆</title>
+    <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+    <!-- 全頁飄雪容器 -->
+    <div id="snow-layer" aria-hidden="true"></div>
+
+    <!-- 背景裝飾 -->
+    <div class="bg-decor" aria-hidden="true">
+        <span class="bg-orb orb-1"></span>
+        <span class="bg-orb orb-2"></span>
+        <span class="bg-orb orb-3"></span>
+        <span class="bg-sparkle sp-1"></span>
+        <span class="bg-sparkle sp-2"></span>
+        <span class="bg-sparkle sp-3"></span>
+        <span class="bg-snowmark sm-1"></span>
+        <span class="bg-snowmark sm-2"></span>
+    </div>
+
+    <main class="page">
+        <!-- Hero -->
+        <header class="hero">
+            <h1 class="hero-title">
+                <span class="t-main">[ Pink Forward．</span><!--
+  --><span class="t-sub">聖誕倒數日曆 ]</span>
+            </h1>
+
+
+            <p class="hero-subtitle">－ 一週開箱一次乳癌小知識，陪你／妳度過聖誕月 －</p>
+
+            <div class="tree-wrap" aria-hidden="true">
+                <div class="tree">
+                    <div class="tree-star"></div>
+
+                    <div class="tree-tier t1"></div>
+                    <div class="tree-tier t2"></div>
+                    <div class="tree-tier t3"></div>
+                    <div class="tree-tier t4"></div>
+
+                    <div class="tree-trunk"></div>
+
+                    <!-- 樹上燈泡（純CSS + 動畫） -->
+                    <span class="bulb b1"></span>
+                    <span class="bulb b2"></span>
+                    <span class="bulb b3"></span>
+                    <span class="bulb b4"></span>
+                    <span class="bulb b5"></span>
+                    <span class="bulb b6"></span>
+                    <span class="bulb b7"></span>
+                    <span class="bulb b8"></span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Calendar Card -->
+        <section class="calendar-card" aria-label="聖誕倒數日曆">
+            <div class="calendar">
+                <div class="dow">Sun</div>
+                <div class="dow">Mon</div>
+                <div class="dow">Tue</div>
+                <div class="dow">Wed</div>
+                <div class="dow">Thu</div>
+                <div class="dow">Fri</div>
+                <div class="dow">Sat</div>
+
+                <!-- 本月從週一開始：第一格 Sun 留白 -->
+                <div class="cell cell-empty"></div>
+
+                <!-- 1~6 -->
+                <button class="cell day locked" type="button" data-day="1" disabled aria-disabled="true">
+                    <span class="day-num">1</span><span class="mini-lock" aria-hidden="true"></span>
+                </button>
+                <button class="cell day locked" type="button" data-day="2" disabled aria-disabled="true">
+                    <span class="day-num">2</span><span class="mini-lock" aria-hidden="true"></span>
+                </button>
+
+                <button class="cell day locked" type="button" data-day="3" disabled aria-disabled="true">
+                    <span class="day-num">3</span><span class="mini-lock" aria-hidden="true"></span>
+                </button>
+
+                <button class="cell day locked" type="button" data-day="4" disabled aria-disabled="true">
+                    <span class="day-num">4</span><span class="mini-lock" aria-hidden="true"></span>
+                </button>
+                <button class="cell day locked" type="button" data-day="5" disabled aria-disabled="true">
+                    <span class="day-num">5</span><span class="mini-lock" aria-hidden="true"></span>
+                </button>
+                <button class="cell day locked" type="button" data-day="6" disabled aria-disabled="true">
+                    <span class="day-num">6</span><span class="mini-lock" aria-hidden="true"></span>
+                </button>
+
+                <!-- 7~13 -->
+                <button class="cell day locked" type="button" data-day="7" disabled aria-disabled="true">
+                    <span class="day-num">7</span><span class="mini-lock" aria-hidden="true"></span>
+                </button>
+                <button class="cell day locked" type="button" data-day="8" disabled aria-disabled="true">
+                    <span class="day-num">8</span><span class="mini-lock" aria-hidden="true"></span>
+                </button>
+                <button class="cell day locked" type="button" data-day="9" disabled aria-disabled="true">
+                    <span class="day-num">9</span><span class="mini-lock" aria-hidden="true"></span>
+                </button>
+
+                <button class="cell day locked" type="button" data-day="10" disabled aria-disabled="true">
+                    <span class="day-num">10</span><span class="mini-lock" aria-hidden="true"></span>
+                </button>
+
+                <button class="cell day locked" type="button" data-day="11" disabled aria-disabled="true">
+                    <span class="day-num">11</span><span class="mini-lock" aria-hidden="true"></span>
+                </button>
+                <button class="cell day locked" type="button" data-day="12" disabled aria-disabled="true">
+                    <span class="day-num">12</span><span class="mini-lock" aria-hidden="true"></span>
+                </button>
+                <button class="cell day locked" type="button" data-day="13" disabled aria-disabled="true">
+                    <span class="day-num">13</span><span class="mini-lock" aria-hidden="true"></span>
+                </button>
+
+                <!-- 14~20 -->
+                <button class="cell day locked" type="button" data-day="14" disabled aria-disabled="true">
+                    <span class="day-num">14</span><span class="mini-lock" aria-hidden="true"></span>
+                </button>
+                <button class="cell day pink" type="button" data-day="15" aria-haspopup="dialog" aria-controls="modal">
+                    <span class="day-num">15</span><span class="mini-bow" aria-hidden="true"></span>
+                </button>
+                <button class="cell day locked" type="button" data-day="16" disabled aria-disabled="true">
+                    <span class="day-num">16</span><span class="mini-lock" aria-hidden="true"></span>
+                </button>
+
+                <button class="cell day pink" type="button" data-day="17" aria-haspopup="dialog" aria-controls="modal">
+                    <span class="day-num">17</span><span class="mini-bow" aria-hidden="true"></span>
+                </button>
+
+                <button class="cell day locked" type="button" data-day="18" disabled aria-disabled="true">
+                    <span class="day-num">18</span><span class="mini-lock" aria-hidden="true"></span>
+                </button>
+                <button class="cell day locked" type="button" data-day="19" disabled aria-disabled="true">
+                    <span class="day-num">19</span><span class="mini-lock" aria-hidden="true"></span>
+                </button>
+                <button class="cell day locked" type="button" data-day="20" disabled aria-disabled="true">
+                    <span class="day-num">20</span><span class="mini-lock" aria-hidden="true"></span>
+                </button>
+
+                <!-- 21~25 -->
+                <button class="cell day locked" type="button" data-day="21" disabled aria-disabled="true">
+                    <span class="day-num">21</span><span class="mini-lock" aria-hidden="true"></span>
+                </button>
+                <button class="cell day pink" type="button" data-day="22" aria-haspopup="dialog" aria-controls="modal">
+                    <span class="day-num">22</span><span class="mini-bow" aria-hidden="true"></span>
+                </button>
+                <button class="cell day locked" type="button" data-day="23" disabled aria-disabled="true">
+                    <span class="day-num">23</span><span class="mini-lock" aria-hidden="true"></span>
+                </button>
+
+                <button class="cell day pink" type="button" data-day="24" aria-haspopup="dialog" aria-controls="modal">
+                    <span class="day-num">24</span><span class="mini-bow" aria-hidden="true"></span>
+                </button>
+
+                <button class="cell day xmas" type="button" data-day="25" aria-haspopup="dialog" aria-controls="modal">
+                    <span class="gift" aria-hidden="true"></span>
+
+                    <!-- 桌機版：框內顯示 -->
+                    <span class="xmas-text">Happy<br />Christmas</span>
+
+                    <!-- 手機版：框外右側顯示（不撐寬欄位） -->
+                    <span class="xmas-side" aria-hidden="true">Happy<br />Christmas</span>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal (Bootstrap-like, pure CSS/JS) -->
+    <div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalTitle">
+        <div class="modal-backdrop" data-modal-close="true"></div>
+
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="modalTitle">Day</h2>
+                    <button class="btn-close" type="button" aria-label="Close" data-modal-close="true"></button>
+                </div>
+
+                <div class="modal-body" id="modalBody">
+                    <!-- JS 注入內容 -->
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" id="modalOk">我知道了</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>
