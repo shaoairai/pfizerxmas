@@ -66,7 +66,10 @@ body {
 /* ---------- 背景裝飾 ---------- */
 .bg-decor {
     position: fixed;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     pointer-events: none;
     overflow: hidden;
     z-index: 0;
@@ -497,7 +500,7 @@ body {
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     border: 1px solid rgba(255, 255, 255, 0.45);
-    padding: clamp(18px, 2.2vw, 28px);
+    padding: 24px;
     backdrop-filter: blur(10px);
 }
 
@@ -505,7 +508,9 @@ body {
     display: grid;
     /* 關鍵：避免某格內容撐寬造成欄位不等寬 */
     grid-template-columns: repeat(7, minmax(0, 1fr));
-    gap: clamp(12px, 1.6vw, 18px);
+    grid-gap: 18px;
+    row-gap: 18px;
+    column-gap: 18px;
     align-items: stretch;
 
     /* 讓 xmas-side 能超出格子往右顯示 */
@@ -530,7 +535,9 @@ body {
 
 .cell {
     position: relative;
-    height: clamp(72px, 7.5vw, 96px);
+    aspect-ratio: 1 / 0.85;
+    min-height: 60px;
+    max-height: 90px;
     border-radius: var(--tile-radius);
 }
 
@@ -541,6 +548,7 @@ body {
 
 .day {
     width: 100%;
+    height: 100%;
     border: 0;
     cursor: pointer;
     display: grid;
@@ -719,7 +727,10 @@ body {
 /* ---------- Modal：水平垂直置中 + 內容可捲動 ---------- */
 .modal {
     position: fixed;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     display: none;
     z-index: 50;
 
@@ -735,7 +746,10 @@ body {
 
 .modal-backdrop {
     position: absolute;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     background: rgba(0, 0, 0, 0.45);
     animation: fadeIn 180ms ease-out forwards;
 }
@@ -928,7 +942,10 @@ body {
 /* ---------- Snow (pure CSS flakes, JS spawns) ---------- */
 #snow-layer {
     position: fixed;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     pointer-events: none;
     overflow: hidden;
     z-index: 2;
@@ -952,7 +969,10 @@ body {
 .snowflake::after {
     content: "";
     position: absolute;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     margin: auto;
     width: 100%;
     height: 2px;
@@ -968,7 +988,10 @@ body {
 
 .snowflake .arm {
     position: absolute;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     margin: auto;
     width: 100%;
     height: 2px;
@@ -981,7 +1004,10 @@ body {
 /* ---------- Password Gate ---------- */
 .gate{
   position: fixed;
-  inset: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   z-index: 999;
   display: flex;
   align-items: center;
