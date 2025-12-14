@@ -1,3 +1,20 @@
+/* ====== 字體宣告 ====== */
+@font-face {
+    font-family: 'ChenYuluoyan';
+    src: url('./font/ChenYuluoyan-2.0-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'ChenYuluoyan Mono';
+    src: url('./font/ChenYuluoyan-Thin-Monospaced.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
 :root {
     --green: #5a8f6f;
     --pink: #f5adc0;
@@ -11,10 +28,20 @@
     --tile-radius: 16px;
 
     --white: #ffffff;
+
+    --font-main: 'ChenYuluoyan', 'Microsoft JhengHei', sans-serif;
 }
 
 * {
     box-sizing: border-box;
+}
+
+/* 強制 button 和 input 繼承字體 */
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
 }
 
 html,
@@ -30,7 +57,7 @@ html{
 
 body {
     margin: 0;
-    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, "PingFang TC", "Microsoft JhengHei", sans-serif;
+    font-family: var(--font-main);
     background: var(--bg);
     color: var(--ink);
     overflow-x: hidden;
@@ -150,7 +177,7 @@ body {
     font-size: clamp(26px, 6vw, 48px);
     letter-spacing: 0.4px;
     color: rgba(211, 72, 118, 0.85);
-    font-family: ui-rounded, "Comic Sans MS", "Segoe Print", cursive, system-ui;
+    font-family: var(--font-main);
     font-weight: 500;
 }
 
@@ -483,7 +510,7 @@ body {
 
 .dow {
     text-align: center;
-    font-family: ui-rounded, "Times New Roman", serif;
+    font-family: var(--font-main);
     letter-spacing: 0.8px;
     color: rgba(211, 72, 118, 0.75);
     font-weight: 600;
@@ -652,7 +679,7 @@ body {
 }
 
 .xmas-text {
-    font-family: ui-rounded, "Times New Roman", serif;
+    font-family: var(--font-main);
     font-weight: 700;
     letter-spacing: 0.8px;
     line-height: 1.05;
@@ -670,7 +697,7 @@ body {
     top: 50%;
     transform: translateY(-50%);
     color: rgba(211, 72, 118, 0.90);
-    font-family: ui-rounded, "Times New Roman", serif;
+    font-family: var(--font-main);
     font-weight: 800;
     letter-spacing: 0.6px;
     line-height: 1.05;
