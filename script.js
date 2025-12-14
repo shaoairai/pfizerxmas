@@ -73,6 +73,14 @@
   // ====== Time Gate (未到時間顯示 wait1.png) ======
   const WAIT_IMG = "./img/wait1.png";
 
+  // 為本次頁面載入生成一個唯一的時間戳（所有資源共用）
+  const PAGE_TIMESTAMP = Date.now();
+
+  // 加上時間戳避免快取
+  function addTimestamp(url) {
+    return `${url}?t=${PAGE_TIMESTAMP}`;
+  }
+
   // 這個活動是 12 月（JavaScript 月份：0=1月...11=12月）
   const CAMPAIGN_MONTH = 11; // Dec
 
@@ -143,14 +151,14 @@
       modalTitle.textContent = `Day ${day}｜尚未開箱，倒數 ${daysLeft} 天！`;
 
       modalBody.innerHTML = `
-        <img class="modal-img" src="${WAIT_IMG}" alt="尚未開箱" loading="lazy" />
+        <img class="modal-img" src="${addTimestamp(WAIT_IMG)}" alt="尚未開箱" />
       `;
     } else {
       modalTitle.textContent = data.title;
 
       if (data.img) {
         modalBody.innerHTML = `
-          <img class="modal-img" src="${data.img}" alt="${data.title}" loading="lazy" />
+          <img class="modal-img" src="${addTimestamp(data.img)}" alt="${data.title}" />
         `;
       } else {
         modalBody.innerHTML = `<p>這天的內容尚未設定。</p>`;
@@ -276,6 +284,31 @@
   }
 
   startSnow();
+
+  // ====== Preload Images ======
+  function preloadAllImages() {
+    const preloadContainer = document.getElementById('preloadImages');
+    if (!preloadContainer) return;
+
+    // 預載等待圖片
+    const waitImg = document.createElement('img');
+    waitImg.src = addTimestamp(WAIT_IMG);
+    waitImg.alt = 'preload';
+    preloadContainer.appendChild(waitImg);
+
+    // 預載所有內容圖片
+    Object.values(dayContent).forEach(data => {
+      if (data.img) {
+        const img = document.createElement('img');
+        img.src = addTimestamp(data.img);
+        img.alt = 'preload';
+        preloadContainer.appendChild(img);
+      }
+    });
+  }
+
+  // 頁面載入完成後預載圖片
+  preloadAllImages();
 
   // ====== Current Date/Time Display ======
   function updateDateTime() {

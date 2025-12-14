@@ -21,7 +21,13 @@
 
     <title>Pink Forward．聖誕倒數日曆</title>
     <link rel="icon" type="image/x-icon" href="./img/pfizer_logoico.ico" />
-    <link rel="stylesheet" href="./styles.css" />
+    <script>
+        // 動態載入 CSS，加上時間戳避免快取
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = './styles.css?t=' + Date.now();
+        document.head.appendChild(link);
+    </script>
 </head>
 
 <body>
@@ -49,6 +55,9 @@
     </div>
 
     <div id="protected" hidden>
+        <!-- 隱藏的圖片預載區 -->
+        <div id="preloadImages" style="display: none;" aria-hidden="true"></div>
+
         <!-- 全頁飄雪容器 -->
         <div id="snow-layer" aria-hidden="true"></div>
 
@@ -244,7 +253,12 @@
         </div>
     </div>
 
-    <script src="./script.js"></script>
+    <script>
+        // 動態載入 JS，加上時間戳避免快取
+        const script = document.createElement('script');
+        script.src = './script.js?t=' + Date.now();
+        document.body.appendChild(script);
+    </script>
 </body>
 
 </html>
