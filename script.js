@@ -100,23 +100,23 @@
   // ====== Modal content per day ======
   const dayContent = {
     15: {
-      title: "Day 15｜乳癌小知識 #1",
+      title: "乳癌小知識 #1",
       img: "./img/doc15.jpg"
     },
     17: {
-      title: "Day 17｜乳癌小知識 #2",
+      title: "乳癌小知識 #2",
       img: "./img/doc17.jpg"
     },
     22: {
-      title: "Day 22｜乳癌小知識 #3",
+      title: "乳癌小知識 #3",
       img: "./img/doc22.jpg"
     },
     24: {
-      title: "Day 24｜平安夜小提醒",
+      title: "平安夜小提醒",
       img: "./img/doc24.jpg"
     },
     25: {
-      title: "Day 25｜Merry Christmas",
+      title: "Merry Christmas",
       img: "./img/doc25.jpg"
     }
   };
@@ -132,8 +132,8 @@
 
   function openModal(day) {
     const data = dayContent[day] || {
-      title: `Day ${day}`,
-      body: `<p>這天的內容尚未設定。</p>`
+      title: "尚未開箱，敬請期待",
+      body: `<p>尚未開箱，敬請期待</p>`
     };
 
     lastActiveElement = document.activeElement;
@@ -141,27 +141,27 @@
     // ====== Time check ======
     const now = new Date();
     const unlockAt = getUnlockAt(day, data);
-    const notYet = now < unlockAt;
+    const notYet = 0; // 測試模式：設為 0 強制全部開箱，設為 now < unlockAt 恢復正常
+    // const notYet = now < unlockAt;
 
     if (notYet) {
-      // 計算倒數天數
-      const timeDiff = unlockAt - now;
-      const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-
-      modalTitle.textContent = `Day ${day}｜尚未開箱，倒數 ${daysLeft} 天！`;
+      // 尚未開箱時，統一顯示
+      modalTitle.textContent = "尚未開箱，敬請期待";
 
       modalBody.innerHTML = `
         <img class="modal-img" src="${addTimestamp(WAIT_IMG)}" alt="尚未開箱" />
       `;
     } else {
-      modalTitle.textContent = data.title;
+      // 已開箱時，計算距離聖誕節的天數（25 - 當天日期）
+      const daysToXmas = 25 - day;
+      modalTitle.textContent = `聖誕節倒數 ${daysToXmas} 天｜${data.title}`;
 
       if (data.img) {
         modalBody.innerHTML = `
           <img class="modal-img" src="${addTimestamp(data.img)}" alt="${data.title}" />
         `;
       } else {
-        modalBody.innerHTML = `<p>這天的內容尚未設定。</p>`;
+        modalBody.innerHTML = `<p>尚未開箱，敬請期待</p>`;
       }
     }
 
