@@ -52,7 +52,7 @@
   });
 
   // ====== Time Gate (未到時間顯示 wait1.png) ======
-  const WAIT_IMG = "./wait1.png";
+  const WAIT_IMG = "./img/wait1.png";
 
   // 這個活動是 12 月（JavaScript 月份：0=1月...11=12月）
   const CAMPAIGN_MONTH = 11; // Dec
@@ -74,23 +74,23 @@
   const dayContent = {
     15: {
       title: "Day 15｜乳癌小知識 #1",
-      img: "./doc15.jpg"
+      img: "./img/doc15.jpg"
     },
     17: {
       title: "Day 17｜乳癌小知識 #2",
-      img: "./doc17.jpg"
+      img: "./img/doc17.jpg"
     },
     22: {
       title: "Day 22｜乳癌小知識 #3",
-      img: "./doc22.jpg"
+      img: "./img/doc22.jpg"
     },
     24: {
       title: "Day 24｜平安夜小提醒",
-      img: "./doc24.jpg"
+      img: "./img/doc24.jpg"
     },
     25: {
       title: "Day 25｜Merry Christmas",
-      img: "./doc25.jpg"
+      img: "./img/doc25.jpg"
     }
   };
 
@@ -114,12 +114,14 @@
     // ====== Time check ======
     const now = new Date();
     const unlockAt = getUnlockAt(day, data);
-    // const notYet = now < unlockAt;
-
-    const notYet = 0; // 強制測試用
+    const notYet = now < unlockAt;
 
     if (notYet) {
-      modalTitle.textContent = `Day ${day}｜尚未開箱`;
+      // 計算倒數天數
+      const timeDiff = unlockAt - now;
+      const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+      modalTitle.textContent = `Day ${day}｜尚未開箱，倒數 ${daysLeft} 天！`;
 
       modalBody.innerHTML = `
         <img class="modal-img" src="${WAIT_IMG}" alt="尚未開箱" loading="lazy" />
@@ -139,6 +141,9 @@
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
+
+    // 每次打開彈窗都將捲軸重置到最上面
+    modalBody.scrollTop = 0;
 
     const closeBtn = modal.querySelector(".btn-close");
     closeBtn && closeBtn.focus();
@@ -252,4 +257,26 @@
   }
 
   startSnow();
+
+  // ====== Current Date/Time Display ======
+  function updateDateTime() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+
+    const dateTimeEl = document.getElementById('currentDateTime');
+    if (dateTimeEl) {
+      dateTimeEl.textContent = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    }
+  }
+
+  // 立即更新一次
+  updateDateTime();
+
+  // 每秒更新一次
+  setInterval(updateDateTime, 1000);
 })();
