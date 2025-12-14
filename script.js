@@ -37,8 +37,6 @@
     }
   }
 
-  unlock(); // 這行要記得打開或註解掉
-
   // // 若已通過（記住登入），直接解鎖
   // if (localStorage.getItem(STORAGE_KEY) === "1") {
   //   unlock();
@@ -50,6 +48,27 @@
   input.addEventListener("keydown", (e) => {
     if (e.key === "Enter") checkPassword();
   });
+
+  // ====== Password Toggle (眼睛圖示切換顯示/隱藏密碼) ======
+  const togglePwBtn = document.getElementById("togglePw");
+
+  if (togglePwBtn && input) {
+    togglePwBtn.addEventListener("click", () => {
+      const isPassword = input.type === "password";
+
+      // 切換 input type
+      input.type = isPassword ? "text" : "password";
+
+      // 切換按鈕樣式
+      togglePwBtn.classList.toggle("show", isPassword);
+
+      // 更新 aria-label
+      togglePwBtn.setAttribute("aria-label", isPassword ? "隱藏密碼" : "顯示密碼");
+
+      // 保持焦點在輸入框
+      input.focus();
+    });
+  }
 
   // ====== Time Gate (未到時間顯示 wait1.png) ======
   const WAIT_IMG = "./img/wait1.png";
