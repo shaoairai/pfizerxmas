@@ -57,7 +57,7 @@ html{
 
 body {
     margin: 0;
-    font-family: var(--font-main);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, "PingFang TC", "Microsoft JhengHei", sans-serif;
     background: var(--bg);
     color: var(--ink);
     overflow-x: hidden;
@@ -186,13 +186,23 @@ body {
     font-size: clamp(14px, 3vw, 32px);
     color: rgba(43, 91, 70, 0.75);
     letter-spacing: 0.2px;
+    font-family: var(--font-main);
 }
 
 .hero-subtitle-small {
-    margin: 0 0 22px;
+    margin: 0 0 10px;
     font-size: clamp(12px, 2vw, 24px);
     color: rgba(43, 91, 70, 0.65);
     letter-spacing: 0.2px;
+    font-family: var(--font-main);
+}
+
+.hero-credit {
+    margin: 0 0 22px;
+    font-size: clamp(10px, 1.5vw, 14px);
+    color: rgba(43, 91, 70, 0.45);
+    letter-spacing: 0.3px;
+    font-style: italic;
 }
 
 /* 桌機預設：同一行 */
@@ -510,11 +520,12 @@ body {
 
 .dow {
     text-align: center;
-    font-family: var(--font-main);
     letter-spacing: 0.8px;
     color: rgba(211, 72, 118, 0.75);
     font-weight: 600;
     padding: 6px 0 10px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
 }
 
 .cell {
@@ -571,6 +582,7 @@ body {
     font-size: clamp(22px, 2.2vw, 28px);
     font-weight: 700;
     text-shadow: 0 2px 0 rgba(0, 0, 0, 0.08);
+    font-family: "Comic Sans MS", "Chalkboard SE", "Bradley Hand", cursive, sans-serif;
 }
 
 /* 迷你鎖頭 */
@@ -679,7 +691,6 @@ body {
 }
 
 .xmas-text {
-    font-family: var(--font-main);
     font-weight: 700;
     letter-spacing: 0.8px;
     line-height: 1.05;
@@ -697,7 +708,6 @@ body {
     top: 50%;
     transform: translateY(-50%);
     color: rgba(211, 72, 118, 0.90);
-    font-family: var(--font-main);
     font-weight: 800;
     letter-spacing: 0.6px;
     line-height: 1.05;

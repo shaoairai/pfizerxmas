@@ -14,6 +14,9 @@
     gate.setAttribute("aria-hidden", "true");
     protectedEl.hidden = false;
     document.body.style.overflow = ""; // 還原滾動
+
+    // 解鎖後才開始下雪
+    startSnow();
   }
 
   function lock() {
@@ -154,12 +157,27 @@
     } else {
       // 已開箱時，計算距離聖誕節的天數（25 - 當天日期）
       const daysToXmas = 25 - day;
-      modalTitle.textContent = `聖誕節倒數 ${daysToXmas} 天｜${data.title}`;
+
+      // 如果是聖誕節當天（倒數0天），只顯示標題
+      if (daysToXmas === 0) {
+        modalTitle.textContent = data.title;
+      } else {
+        modalTitle.textContent = `聖誕節倒數 ${daysToXmas} 天｜${data.title}`;
+      }
 
       if (data.img) {
-        modalBody.innerHTML = `
-          <img class="modal-img" src="${addTimestamp(data.img)}" alt="${data.title}" />
-        `;
+        // 聖誕節當天的圖片加上 YouTube 連結
+        if (day === 25) {
+          modalBody.innerHTML = `
+            <a href="https://www.youtube.com/watch?v=aAkMkVFwAoo" target="_blank" rel="noopener noreferrer">
+              <img class="modal-img" src="${addTimestamp(data.img)}" alt="${data.title}" style="cursor: pointer;" />
+            </a>
+          `;
+        } else {
+          modalBody.innerHTML = `
+            <img class="modal-img" src="${addTimestamp(data.img)}" alt="${data.title}" />
+          `;
+        }
       } else {
         modalBody.innerHTML = `<p>尚未開箱，敬請期待</p>`;
       }
@@ -283,7 +301,8 @@
     }, rand(140, 260));
   }
 
-  startSnow();
+  // 雪花會在 unlock() 時啟動，不在這裡自動啟動
+  // startSnow();
 
   // ====== Preload Images ======
   function preloadAllImages() {
