@@ -22,26 +22,22 @@
     <title>Pink Forward．聖誕倒數日曆</title>
     <link rel="icon" type="image/x-icon" href="./img/pfizer_logoico.ico" />
 
-    <!-- 預載字體 -->
-    <link rel="preload" href="./font/ChenYuluoyan-2.0-Thin.ttf" as="font" type="font/ttf" crossorigin>
+    <!-- 靜態 CSS：先載入避免破圖 -->
+    <link rel="stylesheet" href="./styles.css">
 
-    <!-- 先隱藏 body 避免破圖閃爍 -->
-    <style>
-        body { visibility: hidden; }
-        body.loaded { visibility: visible; }
-    </style>
 
     <script>
-        // 動態載入 CSS，加上時間戳避免快取
+        // 動態載入帶時間戳的 CSS 覆蓋靜態版本，避免快取
         const link = document.createElement('link');
         link.rel = 'stylesheet';
         link.href = './styles.css?t=' + Date.now();
-        link.onload = function() {
-            // CSS 載入完成後顯示頁面
-            document.body.classList.add('loaded');
-        };
         document.head.appendChild(link);
     </script>
+
+
+    <!-- 預載字體 -->
+    <link rel="preload" href="./font/ChenYuluoyan-2.0-Thin.ttf" as="font" type="font/ttf" crossorigin>
+
 </head>
 
 <body>
@@ -52,8 +48,8 @@
 
             <div class="gate-row">
                 <div class="password-wrapper">
-                    <input id="pwInput" class="gate-input" type="password" inputmode="text" autocomplete="current-password"
-                        placeholder="Password" aria-label="Password" />
+                    <input id="pwInput" class="gate-input" type="password" inputmode="text"
+                        autocomplete="current-password" placeholder="Password" aria-label="Password" />
                     <button id="togglePw" class="eye-toggle" type="button" aria-label="顯示密碼">
                         <span class="eye">
                             <span class="eye-ball"></span>
