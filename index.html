@@ -25,11 +25,21 @@
     <!-- 預載字體 -->
     <link rel="preload" href="./font/ChenYuluoyan-2.0-Thin.ttf" as="font" type="font/ttf" crossorigin>
 
+    <!-- 先隱藏 body 避免破圖閃爍 -->
+    <style>
+        body { visibility: hidden; }
+        body.loaded { visibility: visible; }
+    </style>
+
     <script>
         // 動態載入 CSS，加上時間戳避免快取
         const link = document.createElement('link');
         link.rel = 'stylesheet';
         link.href = './styles.css?t=' + Date.now();
+        link.onload = function() {
+            // CSS 載入完成後顯示頁面
+            document.body.classList.add('loaded');
+        };
         document.head.appendChild(link);
     </script>
 </head>

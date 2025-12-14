@@ -327,7 +327,11 @@
   }
 
   // 頁面載入完成後預載圖片
-  preloadAllImages();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', preloadAllImages);
+  } else {
+    preloadAllImages();
+  }
 
   // ====== Current Date/Time Display ======
   function updateDateTime() {
