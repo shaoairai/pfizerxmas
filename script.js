@@ -102,20 +102,16 @@
 
   // ====== Modal content per day ======
   const dayContent = {
-    15: {
-      title: "乳癌小知識 #1",
-      img: "./img/doc15.jpg"
-    },
     17: {
-      title: "乳癌小知識 #2",
+      title: "乳癌小知識 #1",
       img: "./img/doc17.jpg"
     },
     22: {
-      title: "乳癌小知識 #3",
+      title: "乳癌小知識 #2",
       img: "./img/doc22.jpg"
     },
     24: {
-      title: "平安夜小提醒",
+      title: "乳癌小知識 #3",
       img: "./img/doc24.jpg"
     },
     25: {
