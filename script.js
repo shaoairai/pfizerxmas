@@ -73,8 +73,8 @@
     });
   }
 
-  // ====== Time Gate (未到時間顯示 wait1.png) ======
-  const WAIT_IMG = "./img/wait1.png";
+  // ====== Time Gate (未到時間顯示 wait1.jpg) ======
+  const WAIT_IMG = "./img/wait1.jpg";
 
   // 為本次頁面載入生成一個唯一的時間戳（所有資源共用）
   const PAGE_TIMESTAMP = Date.now();
@@ -103,15 +103,15 @@
   // ====== Modal content per day ======
   const dayContent = {
     17: {
-      title: "乳癌小知識 #1",
+      title: "認識「各式各樣的乳癌小雪怪」",
       img: "./img/doc17.jpg"
     },
     22: {
-      title: "乳癌小知識 #2",
+      title: "選擇「正確的武器，打敗乳癌小雪怪」",
       img: "./img/doc22.jpg"
     },
     24: {
-      title: "乳癌小知識 #3",
+      title: "提高勝率攻略「早期發現乳癌小雪怪」",
       img: "./img/doc24.jpg"
     },
     25: {
@@ -162,13 +162,30 @@
       }
 
       if (data.img) {
-        // 聖誕節當天的圖片加上 YouTube 連結
+        // 聖誕節當天的圖片（暫時停用 YouTube 連結）
         if (day === 25) {
           modalBody.innerHTML = `
-            <a href="https://www.youtube.com/watch?v=aAkMkVFwAoo" target="_blank" rel="noopener noreferrer">
-              <img class="modal-img" src="${addTimestamp(data.img)}" alt="${data.title}" style="cursor: pointer;" />
-            </a>
+            <img class="modal-img" src="${addTimestamp(data.img)}" alt="${data.title}" />
           `;
+          // === 暫時停用 YouTube 連結，之後要啟用把上面改成下面這段 ===
+          // modalBody.innerHTML = `
+          //   <a id="xmasYoutubeLink" href="https://www.youtube.com/watch?v=aAkMkVFwAoo" target="_blank" rel="noopener noreferrer">
+          //     <img class="modal-img" src="${addTimestamp(data.img)}" alt="${data.title}" style="cursor: pointer;" />
+          //   </a>
+          // `;
+          // // GA4 事件追蹤：記錄 YouTube 連結點擊
+          // const youtubeLink = document.getElementById("xmasYoutubeLink");
+          // if (youtubeLink) {
+          //   youtubeLink.addEventListener("click", () => {
+          //     if (typeof gtag === "function") {
+          //       gtag("event", "youtube_link_click", {
+          //         event_category: "engagement",
+          //         event_label: "Merry Christmas YouTube",
+          //         page_name: "pink_forward_calendar"
+          //       });
+          //     }
+          //   });
+          // }
         } else {
           modalBody.innerHTML = `
             <img class="modal-img" src="${addTimestamp(data.img)}" alt="${data.title}" />
@@ -206,6 +223,16 @@
     btn.addEventListener("click", () => {
       const day = Number(btn.dataset.day);
       openModal(day);
+
+      // GA4 事件追蹤：記錄使用者點擊了哪一天
+      if (typeof gtag === "function") {
+        gtag("event", "calendar_day_click", {
+          event_category: "engagement",
+          event_label: `Day ${day}`,
+          day_number: day,
+          page_name: "pink_forward_calendar"
+        });
+      }
     });
   });
 

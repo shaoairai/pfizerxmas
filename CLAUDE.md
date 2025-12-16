@@ -43,7 +43,7 @@ This is a single-page application (SPA) with a simple three-file architecture:
 - Currently configured for days: 15, 17, 22, 24, 25
 - Each entry contains `title` and `img` path
 - Images located in `./img/` directory (docXX.jpg format)
-- Wait state uses `./wait1.png` (line 55)
+- Wait state uses `./wait1.jpg` (line 55)
 
 **5. Modal Dialog System** ([script.js:98-206](script.js#L98-L206))
 - Custom Bootstrap-style modal implementation
@@ -112,7 +112,7 @@ Then navigate to `http://localhost:8000`
 
 All educational content images follow the naming pattern `doc{day}.jpg` and are located in the `img/` directory. Required images:
 - doc15.jpg, doc17.jpg, doc22.jpg, doc24.jpg, doc25.jpg
-- wait1.png (shown before unlock time)
+- wait1.jpg (shown before unlock time)
 
 ## Important Notes
 
