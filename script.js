@@ -140,8 +140,8 @@
     // ====== Time check ======
     const now = new Date();
     const unlockAt = getUnlockAt(day, data);
-    const notYet = 0; // 測試模式：設為 0 強制全部開箱，設為 now < unlockAt 恢復正常
-    // const notYet = now < unlockAt;
+    // const notYet = 0; // 測試模式：設為 0 強制全部開箱，設為 now < unlockAt 恢復正常
+    const notYet = now < unlockAt;
 
     if (notYet) {
       // 尚未開箱時，統一顯示
